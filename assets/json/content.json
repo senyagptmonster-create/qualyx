@@ -1,0 +1,9 @@
+{
+  "puzzles": [
+    {"id": "p1", "date": "2023-11-01T00:00:00Z"}
+  ],
+  "settings": {
+    "difficulty": "medium",
+    "theme": "dark"
+  }
+}
