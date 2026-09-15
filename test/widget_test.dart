@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:qualyx/product/product_app.dart';
+import 'package:qualyx/qualyx_app.dart';
 
 void main() {
-  testWidgets('Smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: ProductApp()));
-    expect(find.byType(ProductApp), findsOneWidget);
+  testWidgets('QualyxApp smoke test', (WidgetTester tester) async {
+    await tester.pumpWidget(const QualyxApp());
+    expect(find.byType(QualyxApp), findsOneWidget);
   });
 }
