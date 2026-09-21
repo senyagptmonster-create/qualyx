@@ -25,11 +25,15 @@ class BinaryGridPainter extends CustomPainter {
     canvas.drawRRect(rrect, borderPaint);
 
     // Cell calculations
-    final double cellSize = size.width / gridSize;
+    // Fit the grid inside the shorter side so it never paints past its bounds.
+    final double side = size.width < size.height ? size.width : size.height;
+    final double cellSize = side / gridSize;
+    final double ox = (size.width - side) / 2;
+    final double oy = (size.height - side) / 2;
 
     for (int r = 0; r < gridSize; r++) {
       for (int c = 0; c < gridSize; c++) {
-        final cellRect = Rect.fromLTWH(c * cellSize + 4, r * cellSize + 4, cellSize - 8, cellSize - 8);
+        final cellRect = Rect.fromLTWH(ox + c * cellSize + 4, oy + r * cellSize + 4, cellSize - 8, cellSize - 8);
         final cellRRect = RRect.fromRectAndRadius(cellRect, const Radius.circular(8));
 
         final int val = (r < grid.length && c < grid[r].length) ? grid[r][c] : 0;
@@ -62,8 +66,8 @@ class BinaryGridPainter extends CustomPainter {
           )..layout();
 
           final textOffset = Offset(
-            c * cellSize + (cellSize - tp.width) / 2,
-            r * cellSize + (cellSize - tp.height) / 2,
+            ox + c * cellSize + (cellSize - tp.width) / 2,
+            oy + r * cellSize + (cellSize - tp.height) / 2,
           );
           tp.paint(canvas, textOffset);
         }
